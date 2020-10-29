@@ -1,0 +1,16 @@
+<div class="main posts-show">
+  <div class="container">
+    <div class="posts-show-item">
+        <p>
+            <%= @post.content %>
+        </p>
+        <div class="post-time">
+            <%= @post.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+        </div>
+        <div class="post-menus">
+          <%= link_to("edit", "/posts/#{@post.id}/edit") %>
+          <%= link_to("delete", "/posts/#{@post.id}/destroy", {method:"post"}) %>
+        </div>
+    </div>
+  </div>
+</div>
