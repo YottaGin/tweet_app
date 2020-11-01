@@ -13,7 +13,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(name: params[:name], email: params[:email])
+    @user = User.new(name: params[:name], 
+                     email: params[:email],
+                     image_name: "default_user.jpg")
     if @user.save
       flash[:notice] = "Registration Successful"
       redirect_to("/users/index")
@@ -28,8 +30,16 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
+    
     @user.name = params[:name]
     @user.email = params[:email]
+
+    if params[:image]
+      @user.image_name = "#{@user.id}.jpg"
+      image = params[:image]
+      File.binwrite("public/user_images/#{@user.image_name}", image.read)
+    end
+
     if @user.save
       flash[:notice] = "Succeeded in editing the account"
       redirect_to("/users/index")
