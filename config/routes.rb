@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  post 'likes/:post_id/create' => 'likes#create'
+  post 'likes/:post_id/destroy' => 'likes#destroy'
+
+  get 'users/:id/likes' => 'users#likes'
   post 'logout' => 'users#logout'
   post 'login' => 'users#login'
   get 'login' => 'users#login_form'
@@ -19,4 +24,5 @@ Rails.application.routes.draw do
 
   get '/' => 'home#top'
   get 'about' => 'home#about'
+
 end
